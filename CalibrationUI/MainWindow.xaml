@@ -1,0 +1,248 @@
+﻿<Window x:Class="CalibrationUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalibrationUI"
+        mc:Ignorable="d"
+        Title="CALIBRATION | Stabilization algorithm coefficients" Height="640" Width="1200">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="SkyBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Label   Grid.Column="0" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right">IP</Label>
+            <Label   Grid.Column="2" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right">PORT</Label>
+            <TextBox Grid.Column="1" FontSize="14" VerticalAlignment="Center" Name="ipTextbox" Text="192.168.10.127"/>
+            <TextBox Grid.Column="3" FontSize="14" Width="80" VerticalAlignment="Center" HorizontalAlignment="Left" Name="portTextbox" Text="4949"/>
+            <Button  Grid.Column="4" FontSize="14" Width="125" Height="25" FontWeight="Bold" Foreground="green" Click="Button_Click_Connect" Name="session_connect">Connect</Button>
+            <Button  Grid.Column="5" FontSize="14" Width="125" Height="25" FontWeight="Bold" Foreground="red" Click="Button_Click_Disconnect" Name="session_disconnect">Disconnect</Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="#DAF7A6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1" FontSize="16" VerticalAlignment="Center">Yaw</Label>
+                <Label Grid.Row="0" Grid.Column="2" FontSize="16" VerticalAlignment="Center">Pitch</Label>
+                <Label Grid.Row="0" Grid.Column="3" FontSize="16" VerticalAlignment="Center">Roll</Label>
+                <Label Grid.Row="1" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">Kp</Label>
+                <Label Grid.Row="2" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">Ki</Label>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">max Accel</Label>
+                <Label Grid.Row="4" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">max Speed</Label>
+                <Label Grid.Row="5" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">Ratio</Label>
+                <TextBlock Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawKp"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchKp"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollKp"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawKi"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchKi"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollKi"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawMaxAcc"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchMaxAcc"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollMaxAcc"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawMaxSpeed"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchMaxSpeed"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollMaxSpeed"></TextBlock>
+                <TextBlock Grid.Row="5" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawRatio"></TextBlock>
+                <TextBlock Grid.Row="5" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchRatio"></TextBlock>
+                <TextBlock Grid.Row="5" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollRatio"></TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" FontSize="18" FontWeight="Bold" Foreground="green" HorizontalAlignment="Right">Axes ON</Label>
+                <Label Grid.Row="1" FontSize="18" FontWeight="Bold" Foreground="red" HorizontalAlignment="Right">Axes OFF</Label>
+                <Label Grid.Row="2" FontSize="18" HorizontalAlignment="Right">Motion Test</Label>
+                <Label Grid.Row="3" FontSize="18" HorizontalAlignment="Right">Predefined motion</Label>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" FontSize="16" Width="100" Height="25" Click="Button_Click_AxisOnYaw" Name="AxisOnYaw">Yaw</Button>
+                <Button Grid.Row="1" FontSize="16" Width="100" Height="25" Click="Button_Click_AxisOffYaw" Name="AxisOffYaw">Yaw</Button>
+                <Button Grid.Row="2" FontSize="16" Width="100" Height="25" Click="Button_Click_MotionTestYaw" Name="motionTestYaw">Yaw</Button>
+                <Button Grid.Row="3" FontSize="14" Width="100" Height="25" HorizontalAlignment="Center" Click="Button_Click_Move" Name="move">Start</Button>
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" FontSize="16" Width="100" Height="25" Click="Button_Click_AxisOnPitch" Name="AxisOnPitch">Pitch</Button>
+                <Button Grid.Row="1" FontSize="16" Width="100" Height="25" Click="Button_Click_AxisOffPitch" Name="AxisOffPitch">Pitch</Button>
+                <Button Grid.Row="2" FontSize="16" Width="100" Height="25" Click="Button_Click_MotionTestPitch" Name="motionTestPitch">Pitch</Button>
+            </Grid>
+
+            <Grid Grid.Column="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" FontSize="16" Width="100" Height="25" Click="Button_Click_AxisOnRoll" Name="AxisOnRoll">Roll</Button>
+                <Button Grid.Row="1" FontSize="16" Width="100" Height="25" Click="Button_Click_AxisOffRoll" Name="AxisOffRoll">Roll</Button>
+                <Button Grid.Row="2" FontSize="16" Width="100" Height="25" Click="Button_Click_MotionTestRoll" Name="motionTestRoll">Roll</Button>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Background="Salmon">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label  Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">STABILIZATION</Label>
+            <Button Grid.Column="1" FontSize="14" Width="125" Height="25" FontWeight="Bold" Foreground="green" Click="Button_Click_StabStart" Name="stab_start">START</Button>
+            <Button Grid.Column="2" FontSize="14" Width="125" Height="25" FontWeight="Bold" Foreground="red" Click="Button_Click_StabStop" Name="stab_stop">STOP</Button>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="#DAF7A6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="1" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">Kp</Label>
+                <Label Grid.Row="2" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">Ki</Label>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">Ratio</Label>
+                <Label Grid.Row="0" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">Yaw</Label>
+                <Label Grid.Row="0" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">Pitch</Label>
+                <Label Grid.Row="0" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">Roll</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Width="60" FontSize="16" VerticalAlignment="Center" Name="_yawKpUpd"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="2" Width="60" FontSize="16" VerticalAlignment="Center" Name="_pitchKpUpd"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="3" Width="60" FontSize="16" VerticalAlignment="Center" Name="_rollKpUpd"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Width="60" FontSize="16" VerticalAlignment="Center" Name="_yawKiUpd"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="2" Width="60" FontSize="16" VerticalAlignment="Center" Name="_pitchKiUpd"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="3" Width="60" FontSize="16" VerticalAlignment="Center" Name="_rollKiUpd"></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="1" Width="60" FontSize="16" VerticalAlignment="Center" Name="_yawRatioUpd"></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="2" Width="60" FontSize="16" VerticalAlignment="Center" Name="_pitchRatioUpd"></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="3" Width="60" FontSize="16" VerticalAlignment="Center" Name="_rollRatioUpd"></TextBox>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" FontSize="14" Height="25" Width="80" FontWeight="Bold" HorizontalAlignment="Left" Click="Button_Click_LoadParams" Name="pid_load">LOAD</Button>
+                <Button Grid.Row="1" FontSize="14" Height="25" Width="80" FontWeight="Bold" HorizontalAlignment="Left" Click="Button_Click_UpdateParams" Name="pid_update">UPDATE</Button>
+                <Button Grid.Row="2" FontSize="14" Height="25" Width="80" FontWeight="Bold" HorizontalAlignment="Left" Click="Button_Click_SaveParams" Name="pid_save">SAVE</Button>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">Yaw</Label>
+                <Label Grid.Row="0" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">Pitch</Label>
+                <Label Grid.Row="0" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">Roll</Label>
+                <Label Grid.Row="1" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">Set point [deg]</Label>
+                <Label Grid.Row="2" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">IMU.base [deg]</Label>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">APOS [deg]</Label>
+                <Label Grid.Row="4" Grid.Column="0" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center">Position error [deg]</Label>
+                <TextBlock Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawSetPoint"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchSetPoint"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollSetPoint"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawImuBase"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchImuBase"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollImuBase"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawApos"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchApos"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollApos"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_yawErr"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_pitchErr"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Name="_rollErr"></TextBlock>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="4" Background="Red">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+            <Label  Grid.Column="0" FontSize="16" Foreground="white" VerticalAlignment="Center">Captrack Error Register</Label>
+            <Label  Grid.Column="2" FontSize="16" Foreground="white" VerticalAlignment="Center">Motor:</Label>
+            <Label  Grid.Column="4" FontSize="16" Foreground="white" VerticalAlignment="Center">System:</Label>
+            <TextBlock Grid.Column="1" FontSize="16" Foreground="white" HorizontalAlignment="Left" VerticalAlignment="Center" Name="_errorRegister"></TextBlock>
+            <TextBlock Grid.Column="3" FontSize="14" Foreground="white" HorizontalAlignment="Left" VerticalAlignment="Center" Name="_errorMotor"></TextBlock>
+            <TextBlock Grid.Column="5" FontSize="14" Foreground="white" HorizontalAlignment="Left" VerticalAlignment="Center" Name="_errorSystem"></TextBlock>
+        </Grid>
+    </Grid>
+</Window>
