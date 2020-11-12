@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalibrationUI", "CalibrationUI.csproj", "{740F1B19-B7D0-4042-A008-C1E7A3822827}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalibrationModel", "..\CalibrationModel\CalibrationModel.csproj", "{8F8A9F28-B4D7-4CD0-9E4B-34AC633F9E9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{740F1B19-B7D0-4042-A008-C1E7A3822827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740F1B19-B7D0-4042-A008-C1E7A3822827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740F1B19-B7D0-4042-A008-C1E7A3822827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740F1B19-B7D0-4042-A008-C1E7A3822827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F8A9F28-B4D7-4CD0-9E4B-34AC633F9E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F8A9F28-B4D7-4CD0-9E4B-34AC633F9E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F8A9F28-B4D7-4CD0-9E4B-34AC633F9E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F8A9F28-B4D7-4CD0-9E4B-34AC633F9E9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76A9D7DC-2EB9-4D4B-88BE-2BD37B810F2A}
+	EndGlobalSection
+EndGlobal
